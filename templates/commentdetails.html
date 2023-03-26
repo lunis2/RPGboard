@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comment
+{% endblock title %}
+
+{% block content %}
+<div style="display: flex">
+    <div style="flex-basis: 90%; margin-right: 1%;">
+        <h2>Comment to post:</h2>
+        <h4>< {{ comment.post.title }} > {{ comment.post.user_id }} added at: {{ comment.post.created_at }}</h4>
+        <h6>{{ comment.post.content|safe }}</h6>
+        <hr>
+        <h2>Comment:</h2>
+        <h4>{{ comment.user_id }} wrote at: {{ comment.created_at }}</h4>
+        <h6>{{ comment.text }}</h6>
+    </div>
+    <div style="flex-basis: 10%">
+        {% if not comment.is_confirmed %}
+            <a href="{{ request.get_full_path }}/accept" class="btn btn-secondary" style="margin-bottom: 5%; background-color: green">Accept</a>
+        {% endif %}
+        <a href="{{ request.get_full_path }}/delete" class="btn btn-secondary" style="margin-bottom: 5%; background-color: red">Delete</a>
+        <a href="/posts/posts_comments" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock content %}
